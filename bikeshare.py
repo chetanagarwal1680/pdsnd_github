@@ -65,18 +65,13 @@ def load_data(city, month, day):
     df['End Time'] = pd.to_datetime(df['End Time'])
     
     filter =  [month == 'all' or tt.strftime('%b').lower() == month[:3] for tt in df['Start Time']]
-    #datetime.datetime.strptime(df['Start Time'], '%Y-%m-%d %H:%M:%S').strftime('%b').lower() == month
-    df['mn'] = filter
-    #print(filter)
+    df['mn'] = filter    
     
-    df['dt'] = [day == 'all' or  calendar.day_name[ tt.weekday()].lower() == day.lower() for tt in df['Start Time']]
-    
-    
+    df['dt'] = [day == 'all' or  calendar.day_name[ tt.weekday()].lower() == day.lower() for tt in df['Start Time']]  
     
     dfmn = df[df['mn'] == True ]
     
     dfdt = dfmn[dfmn['dt']==True]
-    
     
     return dfdt
 
@@ -111,21 +106,16 @@ def time_stats(df):
 
         for lbl, i in df.iterrows():
             tt =i[1]
-            #datetime.datetime.strptime(i[1], '%Y-%m-%d %H:%M:%S')
             mtname = tt.strftime('%b')
             mths[mtname] = mths.get(mtname,0) +1   
             wod = calendar.day_name[ tt.weekday()]
             wdays[wod] = wdays.get(wod,0)+1
             hr = str(tt.hour)
             shr[hr] = shr.get(hr,0)+1
-            
-            
-
         
         print("\nMost common month is : {}\n".format(max_from_dict(mths)))
 
         # TO DO: display the most common day of week
-
 
         print("\nMost common day of week is : {}\n".format(max_from_dict(wdays)))
 
