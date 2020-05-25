@@ -65,18 +65,13 @@ def load_data(city, month, day):
     df['End Time'] = pd.to_datetime(df['End Time'])
     
     filter =  [month == 'all' or tt.strftime('%b').lower() == month[:3] for tt in df['Start Time']]
-    #datetime.datetime.strptime(df['Start Time'], '%Y-%m-%d %H:%M:%S').strftime('%b').lower() == month
-    df['mn'] = filter
-    #print(filter)
+    df['mn'] = filter    
     
-    df['dt'] = [day == 'all' or  calendar.day_name[ tt.weekday()].lower() == day.lower() for tt in df['Start Time']]
-    
-    
+    df['dt'] = [day == 'all' or  calendar.day_name[ tt.weekday()].lower() == day.lower() for tt in df['Start Time']]  
     
     dfmn = df[df['mn'] == True ]
     
     dfdt = dfmn[dfmn['dt']==True]
-    
     
     return dfdt
 
