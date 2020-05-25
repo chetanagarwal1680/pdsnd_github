@@ -106,21 +106,16 @@ def time_stats(df):
 
         for lbl, i in df.iterrows():
             tt =i[1]
-            #datetime.datetime.strptime(i[1], '%Y-%m-%d %H:%M:%S')
             mtname = tt.strftime('%b')
             mths[mtname] = mths.get(mtname,0) +1   
             wod = calendar.day_name[ tt.weekday()]
             wdays[wod] = wdays.get(wod,0)+1
             hr = str(tt.hour)
             shr[hr] = shr.get(hr,0)+1
-            
-            
-
         
         print("\nMost common month is : {}\n".format(max_from_dict(mths)))
 
         # TO DO: display the most common day of week
-
 
         print("\nMost common day of week is : {}\n".format(max_from_dict(wdays)))
 
